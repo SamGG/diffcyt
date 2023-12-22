@@ -247,10 +247,9 @@ testDA_voom <- function(d_counts, design, contrast,
   # return results in 'rowData' of new 'SummarizedExperiment' object
   
   # fill in any missing rows (filtered clusters) with NAs
-  row_data <- as.data.frame(matrix(as.numeric(NA), nrow = nlevels(cluster_id), ncol = ncol(top)))
+  row_data <- as.data.frame(matrix(as.numeric(NA), nrow = nrow(d_counts), ncol = ncol(top)))
   colnames(row_data) <- colnames(top)
-  cluster_id_nm <- as.numeric(cluster_id)
-  row_data[cluster_id_nm, ] <- top
+  row_data[ix_keep, ] <- top
   
   row_data <- cbind(cluster_id = rowData(d_counts)$cluster_id, row_data)
   
